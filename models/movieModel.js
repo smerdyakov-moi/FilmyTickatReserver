@@ -8,10 +8,10 @@ const movieSchema = mongoose.Schema({
         {
         time: String,
         seats: Number,
-        bookedby:{
+        bookedby:[{
             type:mongoose.Schema.Types.ObjectId, 
             ref:'user'
-        }
+        }]
         }
     ]
 })
