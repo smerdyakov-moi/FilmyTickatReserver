@@ -217,6 +217,8 @@ app.post ('/reserveticket', isLoggedin, async (req,res)=>{
     })
 
     if (index == -1){return res.status(403).send('No such time for the film')}
+    if (movie.showtime[index].seats - seat <0) {return res.status(401).send('No more tickets for this time. Check other timings please !!!')}
+    
     user.bookeds.push({
         movie: movie._id,
         time: timex,
