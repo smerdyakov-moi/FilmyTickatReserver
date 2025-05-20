@@ -184,6 +184,7 @@ app.patch('/updateticket', isLoggedin, async (req, res) => {
                     // remove booking
                     user.bookeds.splice(i, 1);
                     show.bookedby = show.bookedby.filter(uid => uid.toString() !== user._id.toString());
+                    show.seats += booked.ticket
                     await booked.movie.save();
                     await user.save();
                     return res.send('Reservation cancelled');
