@@ -183,7 +183,7 @@ app.patch('/updateticket', isLoggedin, async (req, res) => {
                 } else {
                     // remove booking
                     user.bookeds.splice(i, 1);
-                    show.bookedby = null;
+                    show.bookedby = show.bookedby.filter(uid => uid.toString() !== user._id.toString());
                     await booked.movie.save();
                     await user.save();
                     return res.send('Reservation cancelled');
@@ -224,7 +224,7 @@ app.post ('/reserveticket', isLoggedin, async (req,res)=>{
     await user.save()
 
     movie.showtime[index].seats-=seat
-    movie.showtime[index].bookedby = user._id 
+    movie.showtime[index].bookedby.push(user._id) 
     await movie.save()
 
     res.send(`${seat} ticket${seat>1 ?  "s" :""} reserved successfuly at ${timex} for the film ${name}`)
