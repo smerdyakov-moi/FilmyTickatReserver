@@ -206,15 +206,9 @@ app.patch('/updateticket', isLoggedin, async (req, res) => {
 app.post ('/reserveticket', isLoggedin, async (req,res)=>{
     let {name,timex,seat} = req.body
     let user = await userModel.findOne({_id:req.user.userid})
-
-    index=-1
     let movie = await movieModel.findOne({name})
     
-    movie.showtime.forEach((show, i) => {
-    if (show.time === timex) {
-        index = i;
-    }
-    })
+    let index = movie.showtime.findIndex(element=>element.time===timex)
 
     if (index == -1){return res.status(403).send('No such time for the film')}
     if (movie.showtime[index].seats - seat <0) {return res.status(401).send('No more tickets for this time. Check other timings please !!!')}
