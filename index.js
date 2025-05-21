@@ -171,11 +171,13 @@ app.patch('/updateticket', isLoggedin, async (req, res) => {
                 if (action === "add") {
                     booked.ticket += seat;
                     show.seats -= seat;
+                    if (show.seats<0) {return res.status(404).send("Not enough seats for booking")}
                     await booked.movie.save();
                     await user.save();
                     return res.send('Tickets added successfully');
                 } else if (action === "subtract") {
                     booked.ticket -= seat;
+                    if (booked.ticket<0) {return res.status(404).send("You haven't booked that many tickets to subtract.")}
                     show.seats += seat;
                     await booked.movie.save();
                     await user.save();
