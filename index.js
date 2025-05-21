@@ -131,6 +131,27 @@ app.post('/moviecreate', isAdmin, async (req,res)=>{
     }
 })
 
+//Added admin priviliges for adding or deleting a particular showtime of the movie
+app.delete ('/deletemovieTime', isAdmin, async (req,res)=>{
+    let {movie_name,time} = req.body
+    let movie = await movieModel.findOne({name:movie_name})
+
+    
+    movie.showtime = movie.showtime.filter(element =>element.time !== time)
+    await movie.save()
+
+})
+
+app.post ('/addmovieTime', isAdmin, async(req,res)=>{
+    let {movie_name,time,seats} = req.body
+    let movie = await movieModel.findOne({name:movie_name})
+
+    console.log(movie.showtime)
+
+    movie.showtime.push({time,seats,})
+    await movie.save()
+})
+
 app.get ('/allmovies', isLoggedin, async(req,res)=>{
     let movies = await movieModel.find()
     res.send(movies)
