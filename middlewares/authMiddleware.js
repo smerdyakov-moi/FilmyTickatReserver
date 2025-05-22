@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken')
-
+const {verifyUserToken,verifyAdminToken} = require('../utils/tokenregistration')
 
 const isLoggedin = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) return res.status(401).send('Token missing');
   try {
-    const user = jwt.verify(token, process.env.JWT_USER_KEY);
+    const user = verifyUserToken(token);
     req.user = user;
     next();
   } catch (err) {
@@ -17,7 +17,7 @@ const isAdmin = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) return res.status(401).send('Token missing');
   try {
-    const admin = jwt.verify(token, process.env.JWT_ADMIN_KEY);
+    const admin = verifyAdminToken(token);
     req.admin = admin;
     next();
   } catch (err) {

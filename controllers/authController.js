@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/userModel');
 const adminModel = require('../models/adminModel');
+const {generateUserToken,generateAdminToken} = require('../utils/tokenregistration')
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -25,7 +26,7 @@ const loginUser = async (req, res) => {
 
   const result = await bcrypt.compare(password, user.password);
   if (result) {
-    const token = jwt.sign({ email, userid: user._id }, process.env.JWT_USER_KEY);
+    const token = generateUserToken({ email, userid: user._id })
     res.cookie('token', token, { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'strict' })
       .json('User logged in successfully');
   } else {
@@ -59,7 +60,7 @@ const loginAdmin = async (req, res) => {
 
   const result = await bcrypt.compare(password, admin.password);
   if (result) {
-    const token = jwt.sign({ email, adminid: admin._id }, process.env.JWT_ADMIN_KEY);
+    const token = generateAdminToken({ email, adminid: admin._id })
     res.cookie('token', token, { httpOnly: true, maxAge: 3600000, secure: false, sameSite: 'strict' })
       .json('Admin logged in successfully');
   } else {
