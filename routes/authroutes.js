@@ -14,9 +14,11 @@ const { isLoggedin, isAdmin } = require('../middlewares/authMiddleware');
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.get('/logout', isLoggedin, logoutUser);
+if (process.env.NODE_ENV === 'development')
+  {router.post('/createAdmin', createAdmin);
+  router.post('/loginAdmin', loginAdmin);
+  router.get('/logoutAdmin', isAdmin, logoutAdmin);
+  }
 
-router.post('/createAdmin', createAdmin);
-router.post('/loginAdmin', loginAdmin);
-router.get('/logoutAdmin', isAdmin, logoutAdmin);
 
 module.exports = router;
