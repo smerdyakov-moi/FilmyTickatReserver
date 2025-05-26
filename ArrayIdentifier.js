@@ -1,3 +1,5 @@
+/*
+
 //Flatten an array of arrays
 const array  = [[1,2,3],[4,5,6],[7,8,9]]
 let flattened = array.reduce ((total,value)=>total.concat(value),[])
@@ -59,5 +61,40 @@ let new_items = items.reduce ((accum,value)=>{
     (accum.findIndex(v => v===value)===-1? accum.push(value):null)
     return accum
 },[])
-console.log(new_items)
+console.log(new_items) 
 
+*/
+
+//Seventh Son of A Seventh Son
+
+function findSeventhSonsOfSeventhSons(json){
+    for(i=0;i<json.children.length ;i++) {
+      if (json.children[i].gender==='female') {return "Unfit"}
+    }
+    const seventhson = children[6]
+    const grandchildren = seventhson.children
+      
+    for(i=0;i<7;i++){
+      if (grandchildren[i].gender ==='female') {return "Unfit"}
+    }
+    return "Flory Glory"
+}
+
+console.log(findSeventhSonsOfSeventhSons({
+        name: 'A', gender: 'male', children: [
+            {name: 'B', gender: 'male', children: []},
+            {name: 'C', gender: 'male', children: []},
+            {name: 'D', gender: 'male', children: []},
+            {name: 'E', gender: 'female', children: []}, 
+            {name: 'F', gender: 'male', children: []},
+            {name: 'G', gender: 'male', children: []},
+            {name: 'H', gender: 'male', children: [
+                {name: 'I', gender: 'male', children: []},
+                {name: 'J', gender: 'male', children: []},
+                {name: 'K', gender: 'male', children: []},
+                {name: 'L', gender: 'male', children: []},
+                {name: 'M', gender: 'male', children: []},
+                {name: 'N', gender: 'male', children: []},
+                {name: 'O', gender: 'male', children: []}
+            ]}
+        ]}))
