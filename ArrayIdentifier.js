@@ -1,5 +1,3 @@
-/*
-
 //Flatten an array of arrays
 const array  = [[1,2,3],[4,5,6],[7,8,9]]
 let flattened = array.reduce ((total,value)=>total.concat(value),[])
@@ -63,7 +61,7 @@ let new_items = items.reduce ((accum,value)=>{
 },[])
 console.log(new_items) 
 
-*/
+
 
 //Seventh Son of A Seventh Son
 
@@ -98,3 +96,19 @@ console.log(findSeventhSonsOfSeventhSons({
                 {name: 'O', gender: 'male', children: []}
             ]}
         ]}))
+
+
+//Maximum subarray sum - Warra Bruteforce
+var maxSequence = function(arr){
+  let sum =[]
+  for(let i=0;i<arr.length;i++)
+  {
+      for(let j=i;j<arr.length;j++)
+      {
+          let arr_x= arr.slice(i,j+1)
+          sum.push(arr_x.reduce((accum, value) => accum += value, 0))
+      }
+  }
+  let maxsum = sum.reduce((accum,value)=> (accum<value? accum=value:accum),0)
+  return maxsum
+}
