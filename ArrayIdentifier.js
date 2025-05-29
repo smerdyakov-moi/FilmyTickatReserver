@@ -116,14 +116,11 @@ var maxSequence = function(arr){
 //Polydivisible number?
 function ispolydivisible(n)
 {
-    let array =n.toString().split('')
-    //return array
+    let stringed =n.toString()
     let counter=0   
-    while (counter<array.length){
-        check_string=""
-        for(let i=0;i<=counter;i++){check_string+=array[i]}
-        if(Number(check_string)%(counter+1)!==0){
-                return false}
+    while (counter<stringed.length){
+        check_string=stringed.slice(0,counter+1)
+        if(Number(check_string)%(counter+1)!==0){return false}
         counter+=1
     }
     return true
@@ -133,3 +130,6 @@ function next(n){
     if(ispolydivisible(n)){return n}
     else{return next(n)}
 }
+
+console.log(next(123452))
+
