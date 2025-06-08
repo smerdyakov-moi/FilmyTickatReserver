@@ -65,36 +65,18 @@ console.log(new_items)
 
 */
 
-//Seventh Son of A Seventh Son
 
-function findSeventhSonsOfSeventhSons(json){
-    for(i=0;i<json.children.length ;i++) {
-      if (json.children[i].gender==='female') {return "Unfit"}
+
+
+function primeBefAft(num) {
+    const isPrime= num =>{
+   for(let i = 2, s = Math.sqrt(num); i <= s; i++) {
+        if(num % i === 0) return false;
     }
-    const seventhson = children[6]
-    const grandchildren = seventhson.children
-      
-    for(i=0;i<7;i++){
-      if (grandchildren[i].gender ==='female') {return "Unfit"}
+    return true
     }
-    return "Flory Glory"
+    let before = num-1,after = num +1
+    while(!isPrime(before)){before--}
+    while(!isPrime(after)){after++}
+    return [before,after]
 }
-
-console.log(findSeventhSonsOfSeventhSons({
-        name: 'A', gender: 'male', children: [
-            {name: 'B', gender: 'male', children: []},
-            {name: 'C', gender: 'male', children: []},
-            {name: 'D', gender: 'male', children: []},
-            {name: 'E', gender: 'female', children: []}, 
-            {name: 'F', gender: 'male', children: []},
-            {name: 'G', gender: 'male', children: []},
-            {name: 'H', gender: 'male', children: [
-                {name: 'I', gender: 'male', children: []},
-                {name: 'J', gender: 'male', children: []},
-                {name: 'K', gender: 'male', children: []},
-                {name: 'L', gender: 'male', children: []},
-                {name: 'M', gender: 'male', children: []},
-                {name: 'N', gender: 'male', children: []},
-                {name: 'O', gender: 'male', children: []}
-            ]}
-        ]}))
