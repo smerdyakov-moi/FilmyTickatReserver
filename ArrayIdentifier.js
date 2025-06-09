@@ -1,4 +1,4 @@
-
+/*
 function primeBefAft(num) {
     const isPrime= num =>{
    for(let i = 2, s = Math.sqrt(num); i <= s; i++) {
@@ -231,3 +231,44 @@ function solution(a) {
   }
   return -1
 }
+*/
+
+
+/* Functions are values
+const function1 = function() {return 2}
+
+let x = function1()
+console.log(x)
+
+const obj1 ={
+    num:2,
+    fun: function (){
+        console.log('Y')
+    }
+}
+obj1.fun()
+
+
+function display(param){
+    console.log(param)
+}
+
+function run(param){
+    param()
+}
+
+run(function(){
+    console.log('XTTYP')
+})*/
+
+/*
+Async function code
+setTimeout(function(){
+    console.log("Got the output in 2 seconds")
+},1000)
+
+console.log("Yay")*/
+
+const arrowfunction = (num)=>2*num;
+x=arrowfunction(2);
+console.log(x)
